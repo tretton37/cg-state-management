@@ -1,10 +1,23 @@
-body {
+body,
+html {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: #777;
+  font-weight: 300;
+  background: #fff7ed21;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+* {
+  box-sizing: border-box;
+  font-size: 16px;
+  color: #777;
+  font-weight: 300;
 }
 
 code {
