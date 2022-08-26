@@ -12,7 +12,6 @@ export const EditUserForm: React.FC<EditUserFormProps> = ({
   return (
     <div>
       <div>
-        Form that opens when user is fetched
         <FormGroup>
           <Label>Name</Label>
           <Input
