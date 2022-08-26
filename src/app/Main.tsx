@@ -1,11 +1,11 @@
 import styled from 'styled-components';
-import { EditUserForm } from './components/EditUserForm';
+import { EditUser } from './components/EditUser';
 import { SelectCustomTheme } from './components/SelectCustomTheme';
 
 export const Main: React.FC = () => {
   return (
     <Wrapper>
-      <EditUserForm />
+      <EditUser />
 
       <SelectCustomTheme />
     </Wrapper>

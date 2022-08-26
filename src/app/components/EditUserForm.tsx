@@ -1,28 +1,47 @@
-import { Button, FormGroup, Input, Label } from '../../ui';
-import { SelectUser } from './SelectUser';
+import { useState } from 'react';
+import { IUser } from '../../api/user-api';
+import { FormGroup, Label, Input, Button, InputReadonly } from '../../ui';
+import { SubmitHandler } from './types';
 
-export const EditUserForm: React.FC = () => {
-  // We need to store which method we fetched the user
-  // So that when we save it, we use the same method to save it
+export const EditUserForm: React.FC<EditUserFormProps> = ({
+  user,
+  onSubmitHandler,
+}) => {
+  const [editUser, setEditUser] = useState<IUser>(() => user);
+
   return (
     <div>
-      <SelectUser />
       <div>
         Form that opens when user is fetched
         <FormGroup>
           <Label>Name</Label>
-          <Input />
+          <Input
+            value={user.name}
+            onChange={(ev) => {
+              editUser.name = ev.target.value;
+              setEditUser(editUser);
+            }}
+          />
         </FormGroup>
         <FormGroup>
           <Label>Id</Label>
+          <InputReadonly value={user.id} />
         </FormGroup>
         <FormGroup>
           <Label>Birthdate</Label>
+          <InputReadonly
+            value={user.birthDate.toISOString().substring(0, 10)}
+          />
         </FormGroup>
       </div>
       <FormGroup>
-        <Button>save user</Button>
+        <Button onClick={() => onSubmitHandler(editUser)}>save user</Button>
       </FormGroup>
     </div>
   );
 };
+
+interface EditUserFormProps {
+  user: IUser;
+  onSubmitHandler: SubmitHandler;
+}

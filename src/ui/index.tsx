@@ -38,6 +38,17 @@ export const Input = styled.input`
   min-width: 200px;
 `;
 
+export const InputReadonly = styled.input.attrs({ readonly: true })`
+  ${formItemCss}
+  & + ${Button} {
+    margin-left: 0.5rem;
+  }
+  min-width: 200px;
+  border-color: transparent;
+  background-color: transparent;
+  color: #999;
+`;
+
 export const Label = styled.label`
   display: block;
   font-weight: 500;
@@ -48,6 +59,9 @@ export const Label = styled.label`
 export const Select = styled.select`
   ${formItemCss}
   min-width: 200px;
+  & + ${Button} {
+    margin-left: 0.5rem;
+  }
 `;
 
 export const FormGroup = styled.div`
