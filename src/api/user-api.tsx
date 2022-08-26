@@ -7,7 +7,7 @@ export const GetUserById = (id: number): Promise<IUser> => {
         return resolve(new User(user));
       }
       return reject('No user found');
-    }, 1000);
+    }, 5000);
   });
 };
 
@@ -15,7 +15,7 @@ export const GetUsers = (): Promise<IUser[]> => {
   return new Promise((resolve) => {
     setTimeout(() => {
       return resolve(userData.map((u) => new User(u)));
-    }, 1000);
+    }, 5000);
   });
 };
 
@@ -23,7 +23,7 @@ const SaveUser = (user: IUserModel): Promise<boolean> => {
   return new Promise((_, reject) => {
     setTimeout(() => {
       return reject(false);
-    }, 1000);
+    }, 5000);
   });
 };
 

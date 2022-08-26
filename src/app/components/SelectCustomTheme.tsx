@@ -1,4 +1,4 @@
-import { Button, FormGroup, Label, Select } from '../../ui';
+import { Button, FormGroup, Label, Select } from '../../ui/';
 
 export const SelectCustomTheme: React.FC = () => {
   return (

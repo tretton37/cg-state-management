@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { IUser } from '../../api/user-api';
-import { Button, FormGroup, Input, Label } from '../../ui';
 import { EditUserForm } from './EditUserForm';
 import { SelectUser } from './SelectUser';
 import { SubmitHandler } from './types';
@@ -11,11 +10,14 @@ export const EditUser: React.FC = () => {
   const [user, setUser] = useState<IUser | undefined>();
   const [onSubmitHandler, setOnSubmitHandler] = useState<
     SubmitHandler | undefined
-  >();
+  >((user) => {
+    console.log(user);
+    return Promise.resolve(true);
+  });
 
   return (
     <div>
-      <SelectUser />
+      <SelectUser onSuccessHandler={setUser} />
       {user && onSubmitHandler && (
         <EditUserForm user={user} onSubmitHandler={onSubmitHandler} />
       )}

@@ -24,12 +24,12 @@ export const EditUserForm: React.FC<EditUserFormProps> = ({
         </FormGroup>
         <FormGroup>
           <Label>Id</Label>
-          <InputReadonly value={user.id} />
+          <InputReadonly defaultValue={user.id} />
         </FormGroup>
         <FormGroup>
           <Label>Birthdate</Label>
           <InputReadonly
-            value={user.birthDate.toISOString().substring(0, 10)}
+            defaultValue={user.birthDate.toISOString().substring(0, 10)}
           />
         </FormGroup>
       </div>
