@@ -25,12 +25,18 @@ export const EditUserForm: React.FC<EditUserFormProps> = ({
         <FormGroup>
           <Label>Id</Label>
           <InputReadonly defaultValue={user.id} />
+          {typeof user.id !== 'number' && (
+            <span>Error: ID is not a number</span>
+          )}
         </FormGroup>
         <FormGroup>
           <Label>Birthdate</Label>
           <InputReadonly
             defaultValue={user.birthDate.toISOString().substring(0, 10)}
           />
+          {!(user.birthDate instanceof Date) && (
+            <span>Error: birthdate is not a date</span>
+          )}
         </FormGroup>
       </div>
       <FormGroup>
