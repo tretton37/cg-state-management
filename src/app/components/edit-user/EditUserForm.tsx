@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { IUser } from '../../api/user-api';
-import { FormGroup, Label, Input, Button, InputReadonly } from '../../ui';
-import { SubmitHandler } from './types';
+import { IUser } from '../../../api/user-api';
+import { FormGroup, Label, Input, Button, InputReadonly } from '../../../ui';
+import { SubmitHandler } from '../types';
 
 export const EditUserForm: React.FC<EditUserFormProps> = ({
   user,

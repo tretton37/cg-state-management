@@ -2,21 +2,14 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { IUser } from '../../api/user-api';
 import { StateManagerType } from '../../examples/types';
-import { FormGroup, Input, Label, Select } from '../../ui/styles';
+import { FormGroup, Input, Label } from '../../ui/styles';
 import { FetchUserButton } from './fetch-button/FetchUserButton';
 
-export const SelectUser: React.FC<SelectUserProps> = ({ onSuccessHandler }) => {
-  const [selectedStateManager, setSelectedStateManager] =
-    useState<StateManagerType>('reactcontext');
+export const SelectUser: React.FC<SelectUserProps> = ({
+  onSuccessHandler,
+  statemanager,
+}) => {
   const [selectedId, setSelectedId] = useState<number>(1);
-
-  const onSuccess = (user: IUser) => {
-    onSuccessHandler(user);
-  };
-
-  const onSelectHandler: React.ChangeEventHandler<HTMLSelectElement> = (ev) => {
-    setSelectedStateManager(ev.target.value as StateManagerType);
-  };
 
   const onChangeIdHandler: React.ChangeEventHandler<HTMLInputElement> = (
     ev
@@ -37,20 +30,12 @@ export const SelectUser: React.FC<SelectUserProps> = ({ onSuccessHandler }) => {
             onChange={onChangeIdHandler}
           />
         </FormGroup>
-        <FormGroup>
-          <Label>Select which state manager</Label>
-          <Select onChange={onSelectHandler}>
-            <option value="reactcontext">React Context</option>
-            <option value="reactquery">React Query</option>
-            <option value="reduxtoolkit">Redux Toolkit</option>
-            <option value="jotai">Jotai</option>
-          </Select>
-        </FormGroup>
+
         <FormGroup>
           <Label>&nbsp;</Label>
           <FetchUserButton
-            onSuccess={onSuccess}
-            statemanager={selectedStateManager}
+            onSuccess={onSuccessHandler}
+            statemanager={statemanager}
             id={selectedId}
           />
         </FormGroup>
@@ -60,6 +45,7 @@ export const SelectUser: React.FC<SelectUserProps> = ({ onSuccessHandler }) => {
 };
 
 interface SelectUserProps {
+  statemanager: StateManagerType;
   onSuccessHandler: (user: IUser) => void;
 }
 

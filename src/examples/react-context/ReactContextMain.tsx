@@ -1,0 +1,36 @@
+import { useCallback, useContext } from 'react';
+import styled from 'styled-components';
+import { EditUser } from '../../app/components/edit-user/EditUser';
+import { SelectCustomTheme } from '../../app/components/SelectCustomTheme';
+import { H2 } from '../../ui/styles';
+import { GlobalReactContext } from './global-context';
+
+export const ReactContextMain: React.FC = () => {
+  const ctx = useContext(GlobalReactContext);
+
+  const onSelectThemeHandler = useCallback(
+    (color: string) => {
+      console.log('Setting color to: ' + color);
+      const newTheme = { ...ctx.customTheme, favoriteColor: color };
+      ctx.setCurrentTheme(newTheme);
+    },
+    [ctx]
+  );
+
+  console.log('ctx', ctx);
+
+  return (
+    <Wrapper>
+      <H2>React Context</H2>
+      <EditUser
+        statemanager="reactcontext"
+        saveUserHandler={(_) => Promise.resolve(true)}
+      />
+
+      <SelectCustomTheme onSelectTheme={onSelectThemeHandler} />
+    </Wrapper>
+  );
+};
+const Wrapper = styled.main`
+  padding: 2rem;
+`;

@@ -1,8 +1,15 @@
 import styled from 'styled-components';
+import { JotaiCurrentUser } from '../examples/jotai/JotaiCurrentUser';
+import { ReactContextCurrentUser } from '../examples/react-context/ReactContextCurrentUser';
+import { ReduxToolkitCurrentUser } from '../examples/redux-toolkit/ReduxToolkitCurrentUser';
 
 export const TopBar: React.FC = () => {
   return (
-    <TopContainer>currentUser from the different data stores</TopContainer>
+    <TopContainer>
+      <ReactContextCurrentUser />
+      <JotaiCurrentUser />
+      <ReduxToolkitCurrentUser />
+    </TopContainer>
   );
 };
 

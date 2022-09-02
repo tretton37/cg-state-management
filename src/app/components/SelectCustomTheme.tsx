@@ -1,23 +1,35 @@
+import { useState } from 'react';
 import { Button, FormGroup, Label, Select } from '../../ui/';
 
-export const SelectCustomTheme: React.FC = () => {
+export const SelectCustomTheme: React.FC<SelectCustomThemeProps> = (props) => {
+  const [selectedColor, setSelectedColor] = useState<string>(() => 'red');
+
+  const onClickHandler = () => {
+    props.onSelectTheme(selectedColor);
+  };
+
+  const onChangeHandler: React.ChangeEventHandler<HTMLSelectElement> = (ev) => {
+    setSelectedColor(ev.target.value);
+  };
+
   return (
     <div>
       <FormGroup>
         <Label>Select custom theme color</Label>
-        <Select>
+        <Select onChange={onChangeHandler}>
           <option value="red">red</option>
+          <option value="green">green</option>
+          <option value="blue">blue</option>
         </Select>
       </FormGroup>
+
       <FormGroup>
-        <Label>Select which state manager</Label>
-        <Select>
-          <option value="reactcontext">react context</option>
-        </Select>
-      </FormGroup>
-      <FormGroup>
-        <Button>Set custom theme</Button>
+        <Button onClick={onClickHandler}>Set custom theme</Button>
       </FormGroup>
     </div>
   );
 };
+
+interface SelectCustomThemeProps {
+  onSelectTheme: (theme: string) => void;
+}

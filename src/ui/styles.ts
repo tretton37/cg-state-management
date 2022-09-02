@@ -11,6 +11,22 @@ export const formItemCss = css`
   }
 `;
 
+export const ThemeDemo = styled.div<{ color: string }>`
+  height: 20px;
+  width: 100px;
+  background-color: ${(p) => p.color};
+  font-size: 0.65rem;
+  text-align: center;
+  line-height: 20px;
+  color: white;
+`;
+
+export const HR = styled.hr``;
+
+export const H2 = styled.h2`
+  font-size: 1.5rem;
+`;
+
 export const Input = styled.input`
   ${formItemCss}
   min-width: 200px;
@@ -18,10 +34,8 @@ export const Input = styled.input`
 
 export const InputReadonly = styled.input.attrs({ readonly: true })`
   ${formItemCss}
-
   min-width: 200px;
-  border-color: transparent;
-  background-color: transparent;
+  background-color: #f7f7f7;
   color: #999;
 `;
 

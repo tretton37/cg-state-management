@@ -1,10 +1,18 @@
 import { createContext, PropsWithChildren, useState, useCallback } from 'react';
 import { IUser } from '../../api/user-api';
 import { defaultGlobalState } from '../defaultGlobalState';
-import { IGlobalState } from '../IGlobalState';
+import { IGlobalState, ITheme } from '../IGlobalState';
 
-export const GlobalReactContext = createContext<ReactContextState | undefined>(
-  undefined
+const defaultReactContextState: ReactContextState = {
+  ...defaultGlobalState,
+  users: [],
+  updateUser: function (user: IUser): void {
+    throw new Error('updateUser not implemented.');
+  },
+};
+
+export const GlobalReactContext = createContext<ReactContextState>(
+  defaultReactContextState
 );
 
 export const GlobalContextProvider: React.FC<PropsWithChildren<unknown>> = ({
@@ -34,19 +42,19 @@ export const GlobalContextProvider: React.FC<PropsWithChildren<unknown>> = ({
     ctx.updateUser = updateUser;
   }
 
+  const setCurrentTheme = (theme: ITheme) => {
+    setContextState({ ...contextState, customTheme: theme });
+  };
+
+  if (ctx.setCurrentTheme !== setCurrentTheme) {
+    ctx.setCurrentTheme = setCurrentTheme;
+  }
+
   return (
     <GlobalReactContext.Provider value={ctx}>
       {children}
     </GlobalReactContext.Provider>
   );
-};
-
-const defaultReactContextState: ReactContextState = {
-  ...defaultGlobalState,
-  users: [],
-  updateUser: function (user: IUser): void {
-    throw new Error('Function not implemented.');
-  },
 };
 
 export interface ReactContextState extends IGlobalState {

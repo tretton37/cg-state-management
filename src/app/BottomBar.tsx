@@ -1,22 +1,20 @@
 import styled from 'styled-components';
+import { JotaiCurrentTheme } from '../examples/jotai/JotaiCurrentTheme';
+import { ReactContextCurrentTheme } from '../examples/react-context/ReactContextCurrentTheme';
+import { ReduxToolkitCurrentTheme } from '../examples/redux-toolkit/ReduxToolkitCurrentTheme';
 
 export const BottomBar: React.FC = () => {
   return (
     <BottomContainer>
-      customTheme from global state
-      <ThemeDemo color="red">red</ThemeDemo>
+      <ReactContextCurrentTheme />
+      <JotaiCurrentTheme />
+      <ReduxToolkitCurrentTheme />
     </BottomContainer>
   );
 };
 
-const ThemeDemo = styled.div<{ color: string }>`
-  height: 20px;
-  width: 60px;
-  background-color: ${(p) => p.color};
-`;
-
 const BottomContainer = styled.div`
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   right: 0;

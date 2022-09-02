@@ -1,13 +1,19 @@
 import styled from 'styled-components';
-import { EditUser } from './components/EditUser';
-import { SelectCustomTheme } from './components/SelectCustomTheme';
+import { JotaiMain } from '../examples/jotai/JotaiMain';
+import { ReactContextMain } from '../examples/react-context/ReactContextMain';
+import { ReactQueryMain } from '../examples/react-query/ReactQueryMain';
+import { HR } from '../ui/styles';
 
 export const Main: React.FC = () => {
   return (
     <Wrapper>
-      <EditUser />
-
-      <SelectCustomTheme />
+      Maybe some form of navigation
+      <ReactContextMain />
+      <HR />
+      <JotaiMain />
+      <HR />
+      <ReactQueryMain />
+      <HR />
     </Wrapper>
   );
 };

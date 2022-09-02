@@ -3,7 +3,7 @@ import { IGlobalState, ITheme } from './IGlobalState';
 
 export const defaultGlobalState: IGlobalState = {
   currentUser: undefined,
-  customTheme: undefined,
+  customTheme: { favoriteColor: 'red' },
   setCurrentUser: function (user: IUser): void {
     throw new Error('Function not implemented.');
   },
