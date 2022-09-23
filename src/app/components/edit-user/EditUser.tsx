@@ -24,5 +24,5 @@ export const EditUser: React.FC<EditUserProps> = ({
 
 interface EditUserProps {
   statemanager: StateManagerType;
-  saveUserHandler: (user: IUser) => Promise<boolean>;
+  saveUserHandler: (user: IUser) => Promise<any>;
 }

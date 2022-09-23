@@ -7,7 +7,7 @@ export const GetUserById = (id: number): Promise<IUser> => {
         return resolve(new User(user));
       }
       return reject('No user found');
-    }, 5000);
+    }, 500);
   });
 };
 
@@ -15,15 +15,15 @@ export const GetUsers = (): Promise<IUser[]> => {
   return new Promise((resolve) => {
     setTimeout(() => {
       return resolve(userData.map((u) => new User(u)));
-    }, 5000);
+    }, 500);
   });
 };
 
-const SaveUser = (user: IUserModel): Promise<boolean> => {
+const SaveUser = (user: IUser): Promise<IUser> => {
   return new Promise((resolve) => {
     setTimeout(() => {
-      return resolve(true);
-    }, 5000);
+      return resolve(user);
+    }, 500);
   });
 };
 
@@ -61,7 +61,7 @@ export class User implements IUser {
     this.birthDate = model.birthDate;
   }
 
-  public Save = () => {
+  public Save = (): Promise<IUser> => {
     return SaveUser(this);
   };
 
@@ -73,7 +73,7 @@ export class User implements IUser {
 }
 
 export interface IUser extends IUserModel {
-  Save: () => Promise<boolean>;
+  Save: () => Promise<IUser>;
 }
 
 export interface IUserModel {

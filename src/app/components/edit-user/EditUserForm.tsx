@@ -15,10 +15,10 @@ export const EditUserForm: React.FC<EditUserFormProps> = ({
         <FormGroup>
           <Label>Name</Label>
           <Input
-            value={user.name}
+            value={editUser.name}
             onChange={(ev) => {
-              editUser.name = ev.target.value;
-              setEditUser(editUser);
+              const userCopy = { ...editUser, name: ev.target.value };
+              setEditUser(userCopy);
             }}
           />
         </FormGroup>
