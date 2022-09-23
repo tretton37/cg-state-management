@@ -1,9 +1,12 @@
 import styled from 'styled-components';
+
 import { EditUser } from '../../app/components/edit-user/EditUser';
 import { SelectCustomTheme } from '../../app/components/SelectCustomTheme';
 import { H2 } from '../../ui/styles';
+import { useGlobalContext } from './global-context';
 
 export const JotaiMain: React.FC = () => {
+  const { setTheme } = useGlobalContext();
   return (
     <Wrapper>
       <H2>Jotai</H2>
@@ -12,7 +15,7 @@ export const JotaiMain: React.FC = () => {
         saveUserHandler={(_) => Promise.resolve(true)}
       />
 
-      <SelectCustomTheme onSelectTheme={(theme: string) => console.log} />
+      <SelectCustomTheme onSelectTheme={(theme: string) => setTheme(theme)} />
     </Wrapper>
   );
 };
