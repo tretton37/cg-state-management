@@ -3,7 +3,6 @@ import { JotaiMain } from '../examples/jotai/JotaiMain';
 import { ReactContextMain } from '../examples/react-context/ReactContextMain';
 import { ReactQueryMain } from '../examples/react-query/ReactQueryMain';
 import { ReduxToolkitMain } from '../examples/redux-toolkit/ReduxToolkitMain';
-import { HR } from '../ui/styles';
 
 export const Main: React.FC = () => {
   return (
