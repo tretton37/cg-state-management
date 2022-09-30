@@ -31,22 +31,22 @@ const userData: IUserModel[] = [
   {
     name: 'David',
     id: 1,
-    birthDate: new Date(1979),
+    birthDate: new Date('1979-01-01'),
   },
   {
     name: 'Victor',
     id: 2,
-    birthDate: new Date(1980),
+    birthDate: new Date('1990-01-07'),
   },
   {
     name: 'Christian',
     id: 3,
-    birthDate: new Date(1981),
+    birthDate: new Date('1990-06-07'),
   },
   {
     name: 'Joakim',
     id: 4,
-    birthDate: new Date(1982),
+    birthDate: new Date('1982'),
   },
 ];
 
