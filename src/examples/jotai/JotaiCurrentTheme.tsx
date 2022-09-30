@@ -3,11 +3,11 @@ import { ThemeDemo } from '../../ui/styles';
 import { useGlobalContext } from './global-context';
 
 export const JotaiCurrentTheme: React.FC = () => {
-  const { theme } = useGlobalContext();
+  const { customTheme } = useGlobalContext();
   return (
     <div>
       <Label>Jotai</Label>
-      <ThemeDemo color={theme}>{theme}</ThemeDemo>
+      <ThemeDemo color={customTheme || 'red'}>{customTheme}</ThemeDemo>
     </div>
   );
 };
