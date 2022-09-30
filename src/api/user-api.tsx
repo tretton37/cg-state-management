@@ -36,12 +36,12 @@ const userData: IUserModel[] = [
   {
     name: 'Victor',
     id: 2,
-    birthDate: new Date(1980),
+    birthDate: new Date('1990-01-07'),
   },
   {
     name: 'Christian',
     id: 3,
-    birthDate: new Date(1981),
+    birthDate: new Date('1990-06-07'),
   },
   {
     name: 'Joakim',

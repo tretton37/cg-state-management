@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IUser } from '../../../api/user-api';
 import { FormGroup, Label, Input, Button, InputReadonly } from '../../../ui';
 import { SubmitHandler } from '../types';
@@ -7,7 +7,11 @@ export const EditUserForm: React.FC<EditUserFormProps> = ({
   user,
   onSubmitHandler,
 }) => {
-  const [editUser, setEditUser] = useState<IUser>(() => user);
+  const [editUser, setEditUser] = useState<IUser>(user);
+
+  useEffect(() => {
+    setEditUser(user);
+  }, [user]);
 
   return (
     <div>
@@ -24,7 +28,7 @@ export const EditUserForm: React.FC<EditUserFormProps> = ({
         </FormGroup>
         <FormGroup>
           <Label>Id</Label>
-          <InputReadonly defaultValue={user.id} />
+          <InputReadonly defaultValue={editUser.id} value={editUser.id} />
           {typeof user.id !== 'number' && (
             <span>Error: ID is not a number</span>
           )}
@@ -32,7 +36,8 @@ export const EditUserForm: React.FC<EditUserFormProps> = ({
         <FormGroup>
           <Label>Birthdate</Label>
           <InputReadonly
-            defaultValue={user.birthDate.toISOString().substring(0, 10)}
+            defaultValue={editUser.birthDate.toISOString().substring(0, 10)}
+            value={editUser.birthDate.toISOString().substring(0, 10)}
           />
           {!(user.birthDate instanceof Date) && (
             <span>Error: birthdate is not a date</span>
