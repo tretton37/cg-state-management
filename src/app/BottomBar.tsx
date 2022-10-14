@@ -3,15 +3,13 @@ import { JotaiCurrentTheme } from '../examples/jotai/JotaiCurrentTheme';
 import { ReactContextCurrentTheme } from '../examples/react-context/ReactContextCurrentTheme';
 import { ReduxToolkitCurrentTheme } from '../examples/redux-toolkit/ReduxToolkitCurrentTheme';
 
-export const BottomBar: React.FC = () => {
-  return (
-    <BottomContainer>
-      <ReactContextCurrentTheme />
-      <JotaiCurrentTheme />
-      <ReduxToolkitCurrentTheme />
-    </BottomContainer>
-  );
-};
+export const BottomBar: React.FC = () => (
+  <BottomContainer>
+    <ReactContextCurrentTheme />
+    <JotaiCurrentTheme />
+    <ReduxToolkitCurrentTheme />
+  </BottomContainer>
+);
 
 const BottomContainer = styled.div`
   position: fixed;

@@ -5,8 +5,6 @@ const queryClient = new QueryClient();
 
 export const ReactQueryProvider: React.FC<PropsWithChildren<unknown>> = ({
   children,
-}) => {
-  return (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-  );
-};
+}) => (
+  <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+);

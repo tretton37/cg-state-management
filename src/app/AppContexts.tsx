@@ -4,10 +4,8 @@ import { ReactQueryProvider } from '../examples/react-query/react-query-context'
 
 export const AppContexts: React.FC<PropsWithChildren<unknown>> = ({
   children,
-}) => {
-  return (
-    <ReactQueryProvider>
-      <GlobalContextProvider>{children}</GlobalContextProvider>
-    </ReactQueryProvider>
-  );
-};
+}) => (
+  <ReactQueryProvider>
+    <GlobalContextProvider>{children}</GlobalContextProvider>
+  </ReactQueryProvider>
+);

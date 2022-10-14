@@ -69,7 +69,8 @@
           "endOfLine": "auto",
           "singleQuote": true
         }
-      ]
+      ],
+      "arrow-body-style": ["error", "as-needed"]
     }
   },
   "browserslist": {

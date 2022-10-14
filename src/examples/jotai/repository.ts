@@ -16,21 +16,19 @@ export const useGetUserById = (id: number) => {
   };
 };
 
-function getUserFromState(id: number, ctx: JotaiContext) {
-  return ctx?.users?.find((u) => u.id === id);
-}
+const getUserFromState = (id: number, ctx: JotaiContext) =>
+  ctx?.users?.find((u) => u.id === id);
 
-function getUpdatedUsers(users: IUser[], user: IUser): IUser[] {
-  return users.map((u) => (u.id === user.id ? user : u));
-}
+const getUpdatedUsers = (users: IUser[], user: IUser): IUser[] =>
+  users.map((u) => (u.id === user.id ? user : u));
 
-function saveUserToContext(ctx: JotaiContext, user: IUser): void {
+const saveUserToContext = (ctx: JotaiContext, user: IUser): void => {
   if (!ctx.users?.length) {
     ctx.setUsers([user]);
   } else {
     ctx.setUsers(getUpdatedUsers(ctx.users, user));
   }
-}
+};
 
 export const useGetUsers = () => {
   const ctx = useGlobalContext();

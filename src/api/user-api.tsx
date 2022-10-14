@@ -11,21 +11,15 @@ export const GetUserById = (id: number): Promise<IUser> => {
   });
 };
 
-export const GetUsers = (): Promise<IUser[]> => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      return resolve(userData.map((u) => new User(u)));
-    }, 5);
+export const GetUsers = (): Promise<IUser[]> =>
+  new Promise((resolve) => {
+    setTimeout(() => resolve(userData.map((u) => new User(u))), 5);
   });
-};
 
-const SaveUser = (user: IUserModel): Promise<boolean> => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      return reject(false);
-    }, 3000);
+const SaveUser = (user: IUserModel): Promise<boolean> =>
+  new Promise((resolve, reject) => {
+    setTimeout(() => reject(false), 3000);
   });
-};
 
 const userData: IUserModel[] = [
   {
@@ -61,9 +55,7 @@ export class User implements IUser {
     this.birthDate = model.birthDate;
   }
 
-  public Save = () => {
-    return SaveUser(this);
-  };
+  public Save = () => SaveUser(this);
 
   public Hydrate = (model: IUserModel) => {
     this.name = model.name;

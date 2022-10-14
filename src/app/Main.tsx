@@ -4,16 +4,14 @@ import { ReactContextMain } from '../examples/react-context/ReactContextMain';
 import { ReactQueryMain } from '../examples/react-query/ReactQueryMain';
 import { ReduxToolkitMain } from '../examples/redux-toolkit/ReduxToolkitMain';
 
-export const Main: React.FC = () => {
-  return (
-    <Wrapper>
-      <ReactContextMain />
-      <JotaiMain />
-      <ReactQueryMain />
-      <ReduxToolkitMain />
-    </Wrapper>
-  );
-};
+export const Main: React.FC = () => (
+  <Wrapper>
+    <ReactContextMain />
+    <JotaiMain />
+    <ReactQueryMain />
+    <ReduxToolkitMain />
+  </Wrapper>
+);
 const Wrapper = styled.main`
   padding: 2rem;
   display: grid;

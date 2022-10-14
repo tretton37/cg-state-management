@@ -3,15 +3,13 @@ import { JotaiCurrentUser } from '../examples/jotai/JotaiCurrentUser';
 import { ReactContextCurrentUser } from '../examples/react-context/ReactContextCurrentUser';
 import { ReduxToolkitCurrentUser } from '../examples/redux-toolkit/ReduxToolkitCurrentUser';
 
-export const TopBar: React.FC = () => {
-  return (
-    <TopContainer>
-      <ReactContextCurrentUser />
-      <JotaiCurrentUser />
-      <ReduxToolkitCurrentUser />
-    </TopContainer>
-  );
-};
+export const TopBar: React.FC = () => (
+  <TopContainer>
+    <ReactContextCurrentUser />
+    <JotaiCurrentUser />
+    <ReduxToolkitCurrentUser />
+  </TopContainer>
+);
 
 const TopContainer = styled.div`
   position: sticky;
