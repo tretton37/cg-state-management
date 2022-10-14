@@ -20,13 +20,24 @@ function getUserFromState(id: number, ctx: JotaiContext) {
   return ctx?.users?.find((u) => u.id === id);
 }
 
+function getUpdatedUsers(users: IUser[], user: IUser): IUser[] {
+  return users.map((u) => (u.id === user.id ? user : u));
+}
+
+function saveUserToContext(ctx: JotaiContext, user: IUser): void {
+  if (!ctx.users?.length) {
+    ctx.setUsers([user]);
+  } else {
+    ctx.setUsers(getUpdatedUsers(ctx.users, user));
+  }
+}
+
 export const useGetUsers = () => {
   const ctx = useGlobalContext();
 
   return async () => {
-    const usersFromState = ctx.users;
-    if (usersFromState) {
-      return usersFromState;
+    if (ctx.users) {
+      return ctx.users;
     }
     const users = await GetUsers();
     ctx.setUsers(users);
@@ -39,19 +50,13 @@ export const useUpdateUser = () => {
   const ctx = useGlobalContext();
 
   return async (user: IUser) => {
-    const usersFromState = ctx.users;
+    saveUserToContext(ctx, user);
 
-    if (!usersFromState?.length) {
-      ctx.setUsers([user]);
-    } else {
-      const updatedUsers = usersFromState.map((u) =>
-        u.id === user.id ? user : u
-      );
-      ctx.setUsers(updatedUsers);
+    try {
+      return await user.Save();
+    } catch (e) {
+      ctx.setUsers(ctx.users ?? []);
     }
-
-    const users = await user.Save();
-
-    return users;
+    return false;
   };
 };
