@@ -54,6 +54,16 @@ export class User implements IUser {
   public name: string;
   public id: number;
   public birthDate: Date;
+  public toJSON() {
+    return {
+      name: this.name,
+      id: this.id,
+      birthDate: this.birthDate,
+    };
+  }
+  public fromJSON(iuser: IUserStringModel) {
+    this.Hydrate(iuser);
+  }
 
   constructor(model: IUserModel) {
     this.name = model.name;
@@ -65,10 +75,10 @@ export class User implements IUser {
     return SaveUser(this);
   };
 
-  public Hydrate = (model: IUserModel) => {
-    this.name = model.name;
-    this.id = model.id;
-    this.birthDate = model.birthDate;
+  public Hydrate = (model: IUserStringModel) => {
+    this.name = String(model.name);
+    this.id = Number(model.id);
+    this.birthDate = new Date(model.birthDate);
   };
 }
 
@@ -80,4 +90,10 @@ export interface IUserModel {
   name: string;
   id: number;
   birthDate: Date;
+}
+
+export interface IUserStringModel {
+  name: string;
+  id: string;
+  birthDate: string;
 }
