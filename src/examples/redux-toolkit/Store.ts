@@ -1,6 +1,6 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
-import { reducer as userReducer } from './UserSlice';
+import { configureStore } from "@reduxjs/toolkit";
+import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+import { reducer as userReducer } from "./UserSlice";
 
 const rootReducer = {
   user: userReducer,
@@ -8,6 +8,10 @@ const rootReducer = {
 
 const store = configureStore({
   reducer: rootReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
 export type RootState = ReturnType<typeof store.getState>;
 

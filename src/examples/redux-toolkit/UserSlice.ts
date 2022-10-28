@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { GetUsers, IUser, GetUserById } from '../../api/user-api';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { GetUsers, IUser, GetUserById } from "../../api/user-api";
 
 interface userSliceState {
   users: {
@@ -15,20 +15,20 @@ const initialState: userSliceState = {
   },
 };
 
-export const getUsers = createAsyncThunk('users/getAll', GetUsers);
+export const getUsers = createAsyncThunk("users/getAll", GetUsers);
 export const getUsersById = createAsyncThunk(
-  'users/getById',
+  "users/getById",
   async (id: number) => await GetUserById(id)
 );
 
 const userSlice = createSlice({
-  name: 'user',
+  name: "user",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     // Get users
     builder.addCase(getUsers.pending, (state, action) => {
-      console.log('loading...');
+      console.log("loading...");
       state.users.loading = true;
     });
     builder.addCase(getUsers.fulfilled, (state, action) => {
@@ -36,13 +36,13 @@ const userSlice = createSlice({
       state.users.loading = false;
     });
     builder.addCase(getUsers.rejected, (state, action) => {
-      console.log('FAIL');
+      console.log("FAIL");
       state.users.loading = false;
     });
 
     // Get single user
     builder.addCase(getUsersById.pending, (state, action) => {
-      console.log('loading...');
+      console.log("loading...");
       state.users.loading = true;
     });
     builder.addCase(getUsersById.fulfilled, (state, action) => {
@@ -58,7 +58,7 @@ const userSlice = createSlice({
       state.users.loading = false;
     });
     builder.addCase(getUsersById.rejected, (state, action) => {
-      console.log('FAIL');
+      console.log("FAIL");
       state.users.loading = false;
     });
   },
