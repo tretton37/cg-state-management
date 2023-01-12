@@ -1,4 +1,4 @@
-import { IUser } from '../api/user-api';
+import { IUser } from '../api/types';
 import { IGlobalState, ITheme } from './IGlobalState';
 
 export const defaultGlobalState: IGlobalState = {

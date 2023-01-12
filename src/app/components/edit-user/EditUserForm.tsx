@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { IUser } from '../../../api/user-api';
+import { IUser } from '../../../api/types';
 import { FormGroup, Label, Input, Button, InputReadonly } from '../../../ui';
 import { SubmitHandler } from '../types';
 

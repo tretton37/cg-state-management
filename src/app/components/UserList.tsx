@@ -1,4 +1,4 @@
-import { IUser } from '../../api/user-api';
+import { IUser } from '../../api/types';
 
 export const UserList = ({ users }: { users: IUser[] }) => {
   return (

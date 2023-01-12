@@ -1,4 +1,4 @@
-import { IUser } from '../api/user-api';
+import { IUser } from '../api/types';
 
 export interface IGlobalState {
   currentUser: IUser | undefined;

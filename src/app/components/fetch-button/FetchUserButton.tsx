@@ -1,4 +1,4 @@
-import { IUser } from '../../../api/user-api';
+import { IUser } from '../../../api/types';
 import { JotaiFetchUserButton } from '../../../examples/jotai/JotaiFetchUserButton';
 import { ReactContextFetchUserButton } from '../../../examples/react-context/ReactContextFetchUserButton';
 import { ReactQueryFetchUserButton } from '../../../examples/react-query/ReactQueryFetchUserButton';

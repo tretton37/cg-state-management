@@ -1,5 +1,5 @@
 import { createContext, PropsWithChildren, useState, useCallback } from 'react';
-import { IUser } from '../../api/user-api';
+import { IUser } from '../../api/types';
 import { defaultGlobalState } from '../defaultGlobalState';
 import { IGlobalState, ITheme } from '../IGlobalState';
 

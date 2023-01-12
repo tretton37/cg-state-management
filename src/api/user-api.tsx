@@ -1,3 +1,6 @@
+import { IUser, IUserModel } from './types';
+import { User } from './user';
+
 export const GetUserById = (id: number): Promise<IUser> => {
   const user = userData.find((user) => user.id === id.toString());
 
@@ -15,15 +18,15 @@ export const GetUsers = (): Promise<IUser[]> => {
   return new Promise((resolve) => {
     setTimeout(() => {
       return resolve(userData.map((u) => new User(u)));
-    }, 5000);
+    }, 100);
   });
 };
 
-const SaveUser = (user: IUserModel): Promise<boolean> => {
+export const SaveUser = (user: IUserModel): Promise<boolean> => {
   return new Promise((resolve) => {
     setTimeout(() => {
       return resolve(true);
-    }, 5000);
+    }, 100);
   });
 };
 
@@ -49,47 +52,3 @@ const userData: IUserModel[] = [
     birthDate: new Date('1982').toISOString(),
   },
 ];
-
-export class User implements IUser {
-  public name: string;
-  public id: number;
-  public birthDate: Date;
-
-  constructor(model: IUserModel) {
-    this.name = model.name;
-    this.id = Number(model.id);
-    this.birthDate = new Date(model.birthDate);
-  }
-
-  public Save = () => {
-    return SaveUser(this.toJson());
-  };
-
-  public Hydrate = (model: IUserModel) => {
-    this.name = model.name;
-    this.id = Number(model.id);
-    this.birthDate = new Date(model.birthDate);
-  };
-
-  public toJson = (): IUserModel => {
-    return {
-      name: this.name,
-      id: this.id.toString(),
-      birthDate: this.birthDate.toString(),
-    };
-  };
-}
-
-export interface IUser {
-  Save: () => Promise<boolean>;
-  Hydrate: (model: IUserModel) => void;
-  name: string;
-  id: number;
-  birthDate: Date;
-}
-
-export interface IUserModel {
-  name: string;
-  id: string;
-  birthDate: string;
-}

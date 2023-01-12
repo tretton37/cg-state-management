@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { IUser } from '../../../api/user-api';
+import { IUser } from '../../../api/types';
 import { EditUserForm } from './EditUserForm';
 import { SelectUser } from '../SelectUser';
 import { StateManagerType } from '../../../examples/types';

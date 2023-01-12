@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import { IUser } from '../../api/user-api';
+import { IUser } from '../../api/types';
 import { StateManagerType } from '../../examples/types';
 import { FormGroup, Input, Label } from '../../ui/styles';
 import { FetchUserButton } from './fetch-button/FetchUserButton';
