@@ -39,7 +39,7 @@ const userData: IUserModel[] = [
   {
     name: 'Victor',
     id: '2',
-    birthDate: new Date('1990-01-07').toISOString(),
+    birthDate: new Date('1960-01-07').toISOString(),
   },
   {
     name: 'Christian',
@@ -47,8 +47,53 @@ const userData: IUserModel[] = [
     birthDate: new Date('1990-06-07').toISOString(),
   },
   {
-    name: 'Joakim',
+    name: 'Andre',
     id: '4',
+    birthDate: new Date('1982').toISOString(),
+  },
+  {
+    name: 'Sara',
+    id: '5',
+    birthDate: new Date('1982').toISOString(),
+  },
+  {
+    name: 'Filip',
+    id: '6',
+    birthDate: new Date('1982').toISOString(),
+  },
+  {
+    name: 'Abdallah',
+    id: '7',
+    birthDate: new Date('1982').toISOString(),
+  },
+  {
+    name: 'Bastian',
+    id: '8',
+    birthDate: new Date('1982').toISOString(),
+  },
+  {
+    name: 'Ryan',
+    id: '9',
+    birthDate: new Date('1982').toISOString(),
+  },
+  {
+    name: 'Ariton',
+    id: '10',
+    birthDate: new Date('1982').toISOString(),
+  },
+  {
+    name: 'Teodor',
+    id: '11',
+    birthDate: new Date('1982').toISOString(),
+  },
+  {
+    name: 'Carl',
+    id: '12',
+    birthDate: new Date('1982').toISOString(),
+  },
+  {
+    name: 'Olof',
+    id: '13',
     birthDate: new Date('1982').toISOString(),
   },
 ];
