@@ -10,7 +10,7 @@ export const GetUserById = (id: number): Promise<IUser> => {
         return resolve(new User(user));
       }
       return reject('No user found');
-    }, 5000);
+    }, 100);
   });
 };
 
