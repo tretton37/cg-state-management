@@ -3,12 +3,13 @@ import { EditUser } from '../../app/components/edit-user/EditUser';
 import { SelectCustomTheme } from '../../app/components/SelectCustomTheme';
 import { UserList } from '../../app/components/user-list/UserList';
 import { H2 } from '../../ui/styles';
-import { atomUser } from './atoms';
+import { atomUser, atomTheme } from './atoms';
 import { useAtom } from 'jotai';
 import { SaveUser } from '../../api/user-api';
 
 export const JotaiMain: React.FC = () => {
   const [, setUser] = useAtom(atomUser);
+  const [, setTheme] = useAtom(atomTheme);
   return (
     <Wrapper>
       <H2>Jotai</H2>
@@ -24,7 +25,7 @@ export const JotaiMain: React.FC = () => {
       />
       <UserList users={[]} />
 
-      <SelectCustomTheme onSelectTheme={(theme: string) => console.log} />
+      <SelectCustomTheme onSelectTheme={setTheme} />
     </Wrapper>
   );
 };
