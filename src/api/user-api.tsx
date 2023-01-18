@@ -49,7 +49,7 @@ const userData: IUserModel[] = [
   {
     name: 'Andre',
     id: '4',
-    birthDate: new Date('1982').toISOString(),
+    birthDate: new Date('1995-01-13').toISOString(),
   },
   {
     name: 'Sara',
