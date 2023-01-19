@@ -8,7 +8,7 @@ export const JotaiCurrentUser: React.FC = () => {
   return (
     <div>
       <Label>Jotai</Label>
-      {user ? <span>{user.name}</span> : <span>Not implemented</span>}
+      {user ? <span>{user.name}</span> : <span>No active user</span>}
     </div>
   );
 };
