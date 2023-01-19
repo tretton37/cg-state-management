@@ -1,5 +1,6 @@
 export interface IUser {
   Hydrate: (model: IUserModel) => void;
+  toJson: () => IUserModel;
   name: string;
   id: number;
   birthDate: Date;
