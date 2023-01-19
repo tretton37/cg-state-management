@@ -1,9 +1,9 @@
 import { Label } from '../../ui';
-import { atomUser } from './atoms';
+import { atomActiveUser } from './atoms';
 import { useAtom } from 'jotai';
 
 export const JotaiCurrentUser: React.FC = () => {
-  const [user] = useAtom(atomUser);
+  const [user] = useAtom(atomActiveUser);
 
   return (
     <div>
