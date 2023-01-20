@@ -1,10 +1,9 @@
 import { Label } from '../../ui';
 import { ThemeDemo } from '../../ui/styles';
-import { useAtom } from 'jotai';
-import { atomTheme } from './atoms';
+import { useTheme } from './repository';
 
 export const JotaiCurrentTheme: React.FC = () => {
-  const [theme] = useAtom(atomTheme);
+  const [theme] = useTheme();
   return (
     <div>
       <Label>Jotai</Label>
