@@ -3,6 +3,7 @@ export interface IUser {
   name: string;
   id: number;
   birthDate: Date;
+  toJson: () => IUserModel;
 }
 
 export interface IUserModel {
