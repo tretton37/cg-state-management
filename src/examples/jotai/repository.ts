@@ -1,12 +1,18 @@
 import { GetUserById, SaveUser } from '../../api/user-api';
-import { useAtom } from 'jotai';
-import {
-  atomActiveUserId,
-  atomActiveUser,
-  atomTheme,
-  atomUsersById,
-} from './atoms';
+import { atom, useAtom } from 'jotai';
+import { atomWithStorage } from 'jotai/utils';
 import { IUser } from '../../api/types';
+
+// === Jotai Atoms === //
+
+const atomUsersById = atom<Record<string, IUser>>({});
+const atomActiveUserId = atom<number | undefined>(undefined);
+const atomActiveUser = atom<IUser | undefined>(
+  (get) => get(atomUsersById)[get(atomActiveUserId) ?? '']
+);
+const atomTheme = atomWithStorage('jotai-theme', 'red');
+
+// === State hooks === //
 
 export const useUser = () => {
   const [activeUserId, setActiveUserId] = useAtom(atomActiveUserId);
