@@ -8,12 +8,11 @@ import { useUser, useTheme } from './repository';
 export const JotaiMain: React.FC = () => {
   const { saveUser } = useUser();
   const { setTheme } = useTheme();
-  const saveUserFn = saveUser();
 
   return (
     <Wrapper>
       <H2>Jotai</H2>
-      <EditUser statemanager="jotai" saveUserHandler={saveUserFn} />
+      <EditUser statemanager="jotai" saveUserHandler={saveUser} />
       <UserList users={[]} />
 
       <SelectCustomTheme onSelectTheme={setTheme} />

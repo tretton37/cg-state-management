@@ -7,9 +7,8 @@ export const JotaiFetchUserButton: React.FC<DynamicFetchUserButtonProps> = ({
   onSuccess,
 }) => {
   const { getUserById, setActiveUserId } = useUser();
-  const fetchUserFunc = getUserById(id);
   const onClickHandler = async () => {
-    const user = await fetchUserFunc();
+    const user = await getUserById(id);
     if (user) {
       setActiveUserId(user.id);
       onSuccess(user);

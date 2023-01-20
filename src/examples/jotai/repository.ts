@@ -21,8 +21,8 @@ export const useUser = () => {
     activeUserId,
     setActiveUserId,
     activeUser,
-    getUserById: useGetUserById,
-    saveUser: useSaveUser,
+    getUserById: useGetUserById(),
+    saveUser: useSaveUser(),
   };
 };
 
@@ -31,10 +31,10 @@ export const useTheme = () => {
   return { theme, setTheme };
 };
 
-const useGetUserById = (id: number) => {
+const useGetUserById = () => {
   const [usersById, setUsersById] = useAtom(atomUsersById);
 
-  return async () => {
+  return async (id: number) => {
     const userFromState = usersById[id];
     if (userFromState) {
       return userFromState;
