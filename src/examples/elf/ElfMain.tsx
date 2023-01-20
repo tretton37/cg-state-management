@@ -3,8 +3,11 @@ import { EditUser } from '../../app/components/edit-user/EditUser';
 import { SelectCustomTheme } from '../../app/components/SelectCustomTheme';
 import { UserList } from '../../app/components/user-list/UserList';
 import { H2 } from '../../ui/styles';
+import { useUsers } from './repositories/user.repository';
 
 export const ElfMain: React.FC = () => {
+  const users = useUsers();
+  console.log('users', users);
   return (
     <Wrapper>
       <H2>Elf</H2>
@@ -12,7 +15,8 @@ export const ElfMain: React.FC = () => {
         statemanager="elf"
         saveUserHandler={(_) => Promise.resolve(true)}
       />
-      <UserList users={[]} />
+
+      <UserList users={users} />
 
       <SelectCustomTheme onSelectTheme={(theme: string) => console.log} />
     </Wrapper>

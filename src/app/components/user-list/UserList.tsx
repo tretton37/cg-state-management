@@ -1,4 +1,4 @@
-import { IUser } from '../../../api/types';
+import { IUserModel } from '../../../api/types';
 import { UserListContainer } from './styles';
 
 export const UserList: React.FC<UserListProps> = ({ users, loading }) => {
@@ -14,6 +14,6 @@ export const UserList: React.FC<UserListProps> = ({ users, loading }) => {
 };
 
 interface UserListProps {
-  users: IUser[] | undefined;
+  users: IUserModel[] | undefined;
   loading?: boolean;
 }
