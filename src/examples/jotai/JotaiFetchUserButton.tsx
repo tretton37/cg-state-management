@@ -1,14 +1,12 @@
 import { Button } from '../../ui';
 import { DynamicFetchUserButtonProps } from '../types';
-import { atomActiveUserId } from './atoms';
-import { useAtom } from 'jotai';
-import { useGetUserById } from './repository';
+import { useGetUserById, useActiveUserId } from './repository';
 
 export const JotaiFetchUserButton: React.FC<DynamicFetchUserButtonProps> = ({
   id,
   onSuccess,
 }) => {
-  const [, setActiveUserId] = useAtom(atomActiveUserId);
+  const [, setActiveUserId] = useActiveUserId();
   const fetchUserFunc = useGetUserById(id);
   const onClickHandler = async () => {
     const user = await fetchUserFunc();

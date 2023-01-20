@@ -1,6 +1,11 @@
 import { GetUsers, SaveUser } from '../../api/user-api';
 import { useAtom } from 'jotai';
-import { atomUsers, atomTheme } from './atoms';
+import {
+  atomUsers,
+  atomActiveUserId,
+  atomActiveUser,
+  atomTheme,
+} from './atoms';
 import { IUser } from '../../api/types';
 
 export const useGetUserById = (id: number) => {
@@ -39,10 +44,14 @@ export const useSaveUser = () => {
   };
 };
 
-const findUser = (id: number, users: IUser[]) => {
-  return users?.find((u) => u.id === id);
+export const useActiveUserId = () => {
+  return useAtom(atomActiveUserId);
 };
 
 export const useTheme = () => {
   return useAtom(atomTheme);
+};
+
+const findUser = (id: number, users: IUser[]) => {
+  return users?.find((u) => u.id === id);
 };
