@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { EditUser } from '../../app/components/edit-user/EditUser';
 import { SelectCustomTheme } from '../../app/components/SelectCustomTheme';
-import { UserList } from '../../app/components/UserList';
+import { UserList } from '../../app/components/user-list/UserList';
 import { H2 } from '../../ui/styles';
 
 export const ZustandMain: React.FC = () => {

@@ -1,9 +1,11 @@
 import { IUser } from '../../../api/types';
+import { ElfFetchUserButton } from '../../../examples/elf/ElfFetchUserButton';
 import { JotaiFetchUserButton } from '../../../examples/jotai/JotaiFetchUserButton';
 import { ReactContextFetchUserButton } from '../../../examples/react-context/ReactContextFetchUserButton';
 import { ReactQueryFetchUserButton } from '../../../examples/react-query/ReactQueryFetchUserButton';
 import { ReduxToolkitFetchUserButton } from '../../../examples/redux-toolkit/ReduxToolkitFetchUserButton';
 import { StateManagerType } from '../../../examples/types';
+import { ZustandFetchUserButton } from '../../../examples/zustand/ZustandFetchUserButton';
 
 export const FetchUserButton: React.FC<FetchUserButtonProps> = ({
   statemanager,
@@ -19,6 +21,10 @@ export const FetchUserButton: React.FC<FetchUserButtonProps> = ({
       return <ReduxToolkitFetchUserButton onSuccess={onSuccess} id={id} />;
     case 'jotai':
       return <JotaiFetchUserButton onSuccess={onSuccess} id={id} />;
+    case 'elf':
+      return <ElfFetchUserButton onSuccess={onSuccess} id={id} />;
+    case 'zustand':
+      return <ZustandFetchUserButton onSuccess={onSuccess} id={id} />;
     default:
       throw Error('Not implemented state manager');
   }
