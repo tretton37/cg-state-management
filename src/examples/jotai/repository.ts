@@ -1,41 +1,46 @@
-import { GetUsers, SaveUser } from '../../api/user-api';
+import { GetUserById, SaveUser } from '../../api/user-api';
 import { useAtom } from 'jotai';
 import {
-  atomUsers,
   atomActiveUserId,
   atomActiveUser,
   atomTheme,
+  atomUsersById,
 } from './atoms';
 import { IUser } from '../../api/types';
 
 export const useGetUserById = (id: number) => {
-  const [users, setUsers] = useAtom(atomUsers);
+  const [usersById, setUsersById] = useAtom(atomUsersById);
 
   return async () => {
-    const userFromState = findUser(id, users);
+    const userFromState = usersById[id];
     if (userFromState) {
       return userFromState;
     }
 
-    const newUsers = await GetUsers();
-    setUsers(newUsers);
+    const newUser = await GetUserById(id);
+    setUsersById({
+      ...usersById,
+      [id]: newUser,
+    });
 
-    return findUser(id, newUsers);
+    return newUser;
   };
 };
 
 export const useSaveUser = () => {
-  const [users, setUsers] = useAtom(atomUsers);
+  const [usersById, setUsersById] = useAtom(atomUsersById);
 
   return async (user: IUser): Promise<boolean> => {
-    const userFromState = findUser(user.id, users);
+    const userFromState = usersById[user.id];
     if (userFromState === undefined) {
       return false;
     }
 
     // optimistically update users state
-    const newUsers = users.map((u) => (u === userFromState ? user : u));
-    setUsers(newUsers);
+    setUsersById({
+      ...usersById,
+      [user.id]: user,
+    });
 
     const userModel = user.toJson();
     const didSucceed = await SaveUser(userModel);
@@ -44,14 +49,15 @@ export const useSaveUser = () => {
   };
 };
 
+export const useGetActiveUser = () => {
+  const [activeUser] = useAtom(atomActiveUser);
+  return activeUser;
+};
+
 export const useActiveUserId = () => {
   return useAtom(atomActiveUserId);
 };
 
 export const useTheme = () => {
   return useAtom(atomTheme);
-};
-
-const findUser = (id: number, users: IUser[]) => {
-  return users?.find((u) => u.id === id);
 };
