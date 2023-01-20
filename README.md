@@ -8,6 +8,7 @@ npm run start
 Frameworks up for grabs
 -------------------------------
 React Query
+SWR
 Jotai
 Redux - Redux Toolkit
 React Context
@@ -16,6 +17,7 @@ Elf
 Redux - Rematch
 Hookstate
 Recoil
+
 
 
 Questions about your selected framework

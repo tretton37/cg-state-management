@@ -1,6 +1,8 @@
 import { IUser } from '../api/types';
 
 export type StateManagerType =
+  | 'zustand'
+  | 'elf'
   | 'reactcontext'
   | 'reactquery'
   | 'reduxtoolkit'
