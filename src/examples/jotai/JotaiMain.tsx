@@ -3,11 +3,12 @@ import { EditUser } from '../../app/components/edit-user/EditUser';
 import { SelectCustomTheme } from '../../app/components/SelectCustomTheme';
 import { UserList } from '../../app/components/user-list/UserList';
 import { H2 } from '../../ui/styles';
-import { useSaveUser, useTheme } from './repository';
+import { useUser, useTheme } from './repository';
 
 export const JotaiMain: React.FC = () => {
-  const [, setTheme] = useTheme();
-  const saveUserFn = useSaveUser();
+  const { saveUser } = useUser();
+  const { setTheme } = useTheme();
+  const saveUserFn = saveUser();
 
   return (
     <Wrapper>

@@ -8,7 +8,24 @@ import {
 } from './atoms';
 import { IUser } from '../../api/types';
 
-export const useGetUserById = (id: number) => {
+export const useUser = () => {
+  const [activeUserId, setActiveUserId] = useAtom(atomActiveUserId);
+  const [activeUser] = useAtom(atomActiveUser);
+  return {
+    activeUserId,
+    setActiveUserId,
+    activeUser,
+    getUserById: useGetUserById,
+    saveUser: useSaveUser,
+  };
+};
+
+export const useTheme = () => {
+  const [theme, setTheme] = useAtom(atomTheme);
+  return { theme, setTheme };
+};
+
+const useGetUserById = (id: number) => {
   const [usersById, setUsersById] = useAtom(atomUsersById);
 
   return async () => {
@@ -27,7 +44,7 @@ export const useGetUserById = (id: number) => {
   };
 };
 
-export const useSaveUser = () => {
+const useSaveUser = () => {
   const [usersById, setUsersById] = useAtom(atomUsersById);
 
   return async (user: IUser): Promise<boolean> => {
@@ -47,17 +64,4 @@ export const useSaveUser = () => {
     // todo: handle failure
     return didSucceed;
   };
-};
-
-export const useGetActiveUser = () => {
-  const [activeUser] = useAtom(atomActiveUser);
-  return activeUser;
-};
-
-export const useActiveUserId = () => {
-  return useAtom(atomActiveUserId);
-};
-
-export const useTheme = () => {
-  return useAtom(atomTheme);
 };

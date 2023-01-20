@@ -3,7 +3,7 @@ import { ThemeDemo } from '../../ui/styles';
 import { useTheme } from './repository';
 
 export const JotaiCurrentTheme: React.FC = () => {
-  const [theme] = useTheme();
+  const { theme } = useTheme();
   return (
     <div>
       <Label>Jotai</Label>

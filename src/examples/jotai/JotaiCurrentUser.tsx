@@ -1,13 +1,17 @@
 import { Label } from '../../ui';
-import { useGetActiveUser } from './repository';
+import { useUser } from './repository';
 
 export const JotaiCurrentUser: React.FC = () => {
-  const user = useGetActiveUser();
+  const { activeUser } = useUser();
 
   return (
     <div>
       <Label>Jotai</Label>
-      {user ? <span>{user.name}</span> : <span>No active user</span>}
+      {activeUser ? (
+        <span>{activeUser.name}</span>
+      ) : (
+        <span>No active user</span>
+      )}
     </div>
   );
 };
