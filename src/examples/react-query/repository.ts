@@ -1,8 +1,9 @@
-import { useQuery } from 'react-query';
-import { GetUserById } from '../../api/user-api';
+import { useQuery, useMutation, useQueryClient } from 'react-query';
+import { IUser } from '../../api/types';
+import { GetUserById, SaveUser } from '../../api/user-api';
 
 export const useUser = () => {
-  return { useGetUserById };
+  return { useGetUserById, useSaveUser };
 };
 
 const useGetUserById = (id: number) => {
@@ -12,4 +13,20 @@ const useGetUserById = (id: number) => {
     enabled: false,
   });
   return refetch;
+};
+
+const useSaveUser = (user: IUser) => {
+  const queryClient = useQueryClient();
+  const mutation = useMutation(
+    () => {
+      return SaveUser(user.toJson());
+    },
+    {
+      onSuccess: () => {
+        // Invalidate and refetch
+        queryClient.invalidateQueries('user-');
+      },
+    }
+  );
+  return mutation.mutate;
 };
