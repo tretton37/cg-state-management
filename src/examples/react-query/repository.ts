@@ -3,7 +3,7 @@ import { IUser } from '../../api/types';
 import { GetUserById, SaveUser } from '../../api/user-api';
 
 export const useUser = () => {
-  return { useGetUserById, useSaveUser };
+  return { useGetUserById, saveUser: useSaveUser() };
 };
 
 const useGetUserById = (id: number) => {
@@ -15,11 +15,13 @@ const useGetUserById = (id: number) => {
   return refetch;
 };
 
-const useSaveUser = (user: IUser) => {
+const useSaveUser = () => {
+  let newUser: IUser;
   const queryClient = useQueryClient();
+  const mutateFn = () => SaveUser(newUser.toJson());
   const mutation = useMutation(
     () => {
-      return SaveUser(user.toJson());
+      return mutateFn();
     },
     {
       onSuccess: () => {
@@ -28,5 +30,9 @@ const useSaveUser = (user: IUser) => {
       },
     }
   );
-  return mutation.mutate;
+  return async (user: IUser) => {
+    newUser = user;
+    await mutation.mutate();
+    return true;
+  };
 };
