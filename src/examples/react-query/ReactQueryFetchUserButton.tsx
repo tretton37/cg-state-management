@@ -5,12 +5,11 @@ import { useUser } from './repository';
 export const ReactQueryFetchUserButton: React.FC<
   DynamicFetchUserButtonProps
 > = ({ id, onSuccess }) => {
-  const { useGetUserById } = useUser();
-  const fetchFn = useGetUserById(id);
+  const { getUserById } = useUser();
 
   const onClickHandler = async () => {
-    const { data } = await fetchFn();
-    if (data) onSuccess(data);
+    const user = await getUserById(id);
+    if (user) onSuccess(user);
   };
 
   return <Button onClick={onClickHandler}>Fetch user</Button>;
