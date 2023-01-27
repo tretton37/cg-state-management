@@ -6,7 +6,7 @@ export const useUser = () => {
   const queryClient = useQueryClient();
   return {
     getUserById: makeGetUserById(queryClient),
-    saveUser: useSaveUser(),
+    saveUser: useSaveUser(queryClient),
   };
 };
 
@@ -14,14 +14,16 @@ const makeGetUserById = (client: QueryClient) => {
   return (id: number) => client.fetchQuery(`user-${id}`, () => GetUserById(id));
 };
 
-const useSaveUser = () => {
+const useSaveUser = (client: QueryClient) => {
   let newUser: IUser;
-  const queryClient = useQueryClient();
-  const mutateFn = () => SaveUser(newUser.toJson());
-  const mutation = useMutation(mutateFn, {
+  const mutation = useMutation(() => SaveUser(newUser.toJson()), {
     onSuccess: () => {
-      // Invalidate and refetch
-      queryClient.invalidateQueries('user-');
+      console.log('success');
+
+      // optimistically update state
+      client.setQueryData(`user-${newUser.id}`, newUser);
+      // TODO: uncomment to invalidate and refetch (SaveUser fn must be fully implemented first)
+      // client.invalidateQueries(`user-${newUser.id}`);
     },
   });
   return (user: IUser) => {
