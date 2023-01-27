@@ -11,10 +11,7 @@ export const useUser = () => {
 };
 
 const makeGetUserById = (client: QueryClient) => {
-  return (id: number) =>
-    client.fetchQuery(`user-${id}`, () => GetUserById(id), {
-      staleTime: Infinity,
-    });
+  return (id: number) => client.fetchQuery(`user-${id}`, () => GetUserById(id));
 };
 
 const useSaveUser = () => {
