@@ -4,8 +4,12 @@ import {
   setEntities,
   withEntities,
 } from '@ngneat/elf-entities';
-import { IUserModel } from '../../../api/types';
+import { joinRequestResult, trackRequestResult } from '@ngneat/elf-requests';
+import { IUserModel, IUser } from '../../../api/types';
 import { useObservable } from '@ngneat/react-rxjs';
+import { from, tap } from 'rxjs';
+import { GetUsers } from '../../../api/user-api';
+import { useEffect } from 'react';
 
 const elfUsersStore = createStore(
   { name: 'elfUsers' },
@@ -14,16 +18,31 @@ const elfUsersStore = createStore(
 
 // export const elfUser = ElfUserStore.pipe(select((state) => state));
 
-const users$ = elfUsersStore.pipe(selectAllEntities());
+const users$ = elfUsersStore.pipe(
+  selectAllEntities(),
+  joinRequestResult(['elfUsers'], { initialStatus: 'idle' })
+);
 
-const tempUsers: IUserModel[] = [
-  { id: '1', name: 'User 1', birthDate: new Date('1990-06-07').toDateString() },
-  { id: '2', name: 'User 2', birthDate: new Date('1990-01-07').toDateString() },
-];
+const setUsers = (users: IUser[]) => {
+  elfUsersStore.update(setEntities(users.map(mapUserToUserModel)));
+};
 
-elfUsersStore.update(setEntities(tempUsers));
+const fetchElfUsers = () => {
+  return from(GetUsers()).pipe(tap(setUsers), trackRequestResult(['elfUsers']));
+};
 
 export const useUsers = () => {
   const [users] = useObservable(users$);
+
+  useEffect(() => {
+    fetchElfUsers().subscribe();
+  }, []);
+
   return users;
 };
+
+const mapUserToUserModel = (user: IUser): IUserModel => ({
+  id: user.id.toString(),
+  name: user.name,
+  birthDate: user.birthDate.toDateString(),
+});
