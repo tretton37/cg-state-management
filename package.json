@@ -9,7 +9,7 @@
     "@ngneat/elf": "^2.3.0",
     "@ngneat/elf-entities": "^4.4.3",
     "@ngneat/elf-requests": "^1.6.0",
-    "@ngneat/react-rxjs": "^1.1.0",
+    "@ngneat/use-observable": "^1.0.0",
     "@reduxjs/toolkit": "^1.9.1",
     "@rematch/core": "^2.2.0",
     "@testing-library/jest-dom": "^5.16.5",
