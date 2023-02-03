@@ -11,14 +11,11 @@ export const ReactContextMain: React.FC = () => {
 
   const onSelectThemeHandler = useCallback(
     (color: string) => {
-      console.log('Setting color to: ' + color);
       const newTheme = { ...ctx.customTheme, favoriteColor: color };
       ctx.setCurrentTheme(newTheme);
     },
     [ctx]
   );
-
-  console.log('ctx', ctx);
 
   return (
     <Wrapper>
