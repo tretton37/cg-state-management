@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { JotaiCurrentUser } from '../examples/jotai/JotaiCurrentUser';
 import { ReactContextCurrentUser } from '../examples/react-context/ReactContextCurrentUser';
 import { ReduxToolkitCurrentUser } from '../examples/redux-toolkit/ReduxToolkitCurrentUser';
+import { ElfCurrentUser } from '../examples/elf/ElfCurrentUser';
 
 export const TopBar: React.FC = () => {
   return (
@@ -9,6 +10,7 @@ export const TopBar: React.FC = () => {
       <ReactContextCurrentUser />
       <JotaiCurrentUser />
       <ReduxToolkitCurrentUser />
+      <ElfCurrentUser />
     </TopContainer>
   );
 };
