@@ -1,6 +1,7 @@
 import { Button } from '../../ui';
 import { DynamicFetchUserButtonProps } from '../types';
 import { getUser, setCurrentUser } from './repositories/user.repository';
+import { User } from '../../api/user';
 
 export const ElfFetchUserButton: React.FC<DynamicFetchUserButtonProps> = ({
   id,
@@ -8,8 +9,12 @@ export const ElfFetchUserButton: React.FC<DynamicFetchUserButtonProps> = ({
 }) => {
   const onClickHandler = () => {
     setCurrentUser(id);
-    // getUser(id);
-    // onSuccess();
+    const userModel = getUser(id);
+
+    if (userModel) {
+      const user = new User(userModel);
+      onSuccess(user);
+    }
   };
 
   return <Button onClick={onClickHandler}>Fetch user</Button>;

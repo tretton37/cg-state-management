@@ -6,6 +6,7 @@ import {
   selectAllEntities,
   setActiveId,
   setEntities,
+  updateEntities,
   withActiveId,
   withEntities,
 } from '@ngneat/elf-entities';
@@ -13,7 +14,7 @@ import { joinRequestResult, trackRequestResult } from '@ngneat/elf-requests';
 import { IUserModel, IUser } from '../../../api/types';
 import { useObservable } from '@ngneat/use-observable';
 import { from, tap } from 'rxjs';
-import { GetUserById, GetUsers } from '../../../api/user-api';
+import { GetUserById, GetUsers, SaveUser } from '../../../api/user-api';
 import { useEffect } from 'react';
 
 const elfUsersStore = createStore(
@@ -29,7 +30,7 @@ const users$ = elfUsersStore.pipe(
 
 const currentUser$ = elfUsersStore.pipe(selectActiveEntity());
 
-const setUsers = (users: IUser[]) => {
+const setUsers = (users: IUser[]): void => {
   elfUsersStore.update(setEntities(users.map(mapUserToUserModel)));
 };
 
@@ -37,7 +38,7 @@ const fetchElfUsers = () => {
   return from(GetUsers()).pipe(tap(setUsers), trackRequestResult(['elfUsers']));
 };
 
-export const setCurrentUser = (id: number) => {
+export const setCurrentUser = (id: number): void => {
   return elfUsersStore.update(setActiveId(id));
 };
 
@@ -45,8 +46,16 @@ export const setCurrentUser = (id: number) => {
 //   return from(GetUserById(id)).pipe(tap(setUsers), trackRequestResult(['elfUsers']));
 // };
 
-export const getUser = (id: number) => {
+export const getUser = (id: number): IUserModel | undefined => {
   return elfUsersStore.query(getEntity(id.toString()));
+};
+
+export const updateUser = async (user: IUser) => {
+  const userModel = mapUserToUserModel(user);
+  elfUsersStore.update(updateEntities(user.id.toString(), userModel));
+
+  // API update
+  return SaveUser(userModel);
 };
 
 export const useUsers = () => {
