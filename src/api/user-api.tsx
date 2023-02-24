@@ -23,7 +23,7 @@ export const GetUsers = (): Promise<IUser[]> => {
 };
 
 export const SaveUser = (user: IUserModel): Promise<boolean> => {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     setTimeout(() => {
       return resolve(true);
     }, 100);

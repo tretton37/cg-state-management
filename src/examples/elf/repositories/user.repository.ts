@@ -1,6 +1,5 @@
 import { createStore } from '@ngneat/elf';
 import {
-  getActiveEntity,
   getEntity,
   selectActiveEntity,
   selectAllEntities,
@@ -14,14 +13,17 @@ import { joinRequestResult, trackRequestResult } from '@ngneat/elf-requests';
 import { IUserModel, IUser } from '../../../api/types';
 import { useObservable } from '@ngneat/use-observable';
 import { from, tap } from 'rxjs';
-import { GetUserById, GetUsers, SaveUser } from '../../../api/user-api';
+import { GetUsers, SaveUser } from '../../../api/user-api';
 import { useEffect } from 'react';
+import { syncState } from 'elf-sync-state';
 
 const elfUsersStore = createStore(
   { name: 'elfUsers' },
   withEntities<IUserModel>(),
   withActiveId()
 );
+
+syncState(elfUsersStore);
 
 const users$ = elfUsersStore.pipe(
   selectAllEntities(),
@@ -42,20 +44,24 @@ export const setCurrentUser = (id: number): void => {
   return elfUsersStore.update(setActiveId(id));
 };
 
-// const fetchElfUser = (id: number) => {
-//   return from(GetUserById(id)).pipe(tap(setUsers), trackRequestResult(['elfUsers']));
-// };
-
 export const getUser = (id: number): IUserModel | undefined => {
   return elfUsersStore.query(getEntity(id.toString()));
 };
 
 export const updateUser = async (user: IUser) => {
+  const oldUser = getUser(user.id);
+  if (!oldUser) {
+    throw new Error('User not found');
+  }
   const userModel = mapUserToUserModel(user);
   elfUsersStore.update(updateEntities(user.id.toString(), userModel));
 
   // API update
-  return SaveUser(userModel);
+  SaveUser(userModel).catch(async (e) => {
+    elfUsersStore.update(updateEntities(user.id.toString(), oldUser));
+    return false;
+  });
+  return true;
 };
 
 export const useUsers = () => {

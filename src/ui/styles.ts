@@ -32,7 +32,7 @@ export const Input = styled.input`
   min-width: 200px;
 `;
 
-export const InputReadonly = styled.input.attrs({ readonly: true })`
+export const InputReadonly = styled.input.attrs({ readOnly: true })`
   ${formItemCss}
   min-width: 200px;
   background-color: #f7f7f7;
