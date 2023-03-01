@@ -26,25 +26,43 @@ const useSaveUser = (
   users: IUser[] | undefined = undefined
 ) => {
   let newUser: IUser;
-  const mutation = useMutation(() => SaveUser(newUser.toJson()), {
-    onSuccess: () => {
-      console.log('success');
+  const mutation = useMutation(
+    () => {
+      console.log('mutating');
+      console.log(newUser);
+      console.log(newUser.toJson());
 
-      // optimistically update state
-      client.setQueryData(`user-${newUser.id}`, newUser);
-      if (users !== undefined) {
-        client.setQueryData(
-          'users',
-          users.map((user) => (user.id === newUser.id ? newUser : user))
-        );
-      }
-      // TODO: uncomment to invalidate and refetch (SaveUser fn must be fully implemented first)
-      // client.invalidateQueries(`user-${newUser.id}`);
-      // client.invalidateQueries('users');
+      return SaveUser(newUser.toJson());
     },
-  });
+    {
+      onSuccess: () => {
+        console.log('success');
+
+        // TODO: uncomment to invalidate and refetch (SaveUser fn must be fully implemented first)
+        // client.invalidateQueries(`user-${newUser.id}`);
+        // client.invalidateQueries('users');
+      },
+      onError: () => {
+        alert('An error occured, rolling back optimistic update');
+      },
+    }
+  );
   return (user: IUser) => {
-    newUser = user;
+    debugger;
+    newUser = { ...user };
+
+    console.log('newuser:', newUser);
+
+    // optimistically update state
+    client.setQueryData(`user-${newUser.id}`, newUser);
+    if (users !== undefined) {
+      client.setQueryData(
+        'users',
+        users.map((user) => (user.id === newUser.id ? newUser : user))
+      );
+    }
+    console.log('updated');
+
     mutation.mutate();
     return Promise.resolve(true);
   };
