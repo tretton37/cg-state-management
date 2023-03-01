@@ -6,14 +6,14 @@ import { H2 } from '../../ui/styles';
 import { useUser, useTheme } from './repository';
 
 export const JotaiMain: React.FC = () => {
-  const { saveUser } = useUser();
+  const { users, saveUser } = useUser();
   const { setTheme } = useTheme();
 
   return (
     <Wrapper>
       <H2>Jotai</H2>
       <EditUser statemanager="jotai" saveUserHandler={saveUser} />
-      <UserList users={[]} />
+      <UserList users={users} />
 
       <SelectCustomTheme onSelectTheme={setTheme} />
     </Wrapper>

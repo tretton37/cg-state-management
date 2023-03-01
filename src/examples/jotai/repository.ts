@@ -1,10 +1,11 @@
-import { GetUserById, SaveUser } from '../../api/user-api';
+import { GetUsers, GetUserById, SaveUser } from '../../api/user-api';
 import { atom, useAtom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
 import { IUser } from '../../api/types';
 
 // === Jotai Atoms === //
 
+const atomUsers = atom<IUser[] | undefined>(undefined);
 const atomUsersById = atom<Record<string, IUser>>({});
 const atomActiveUserId = atom<number | undefined>(undefined);
 const atomActiveUser = atom<IUser | undefined>(
@@ -15,9 +16,18 @@ const atomTheme = atomWithStorage('jotai-theme', 'red');
 // === State hooks === //
 
 export const useUser = () => {
+  const [users, setUsers] = useAtom(atomUsers);
   const [activeUserId, setActiveUserId] = useAtom(atomActiveUserId);
   const [activeUser] = useAtom(atomActiveUser);
+
+  if (users === undefined) {
+    GetUsers().then((u) => {
+      setUsers(u);
+    });
+  }
+
   return {
+    users,
     activeUserId,
     setActiveUserId,
     activeUser,
@@ -52,6 +62,7 @@ const useGetUserById = () => {
 
 const useSaveUser = () => {
   const [usersById, setUsersById] = useAtom(atomUsersById);
+  const [users, setUsers] = useAtom(atomUsers);
 
   return async (user: IUser): Promise<boolean> => {
     const userFromState = usersById[user.id];
@@ -64,6 +75,7 @@ const useSaveUser = () => {
       ...usersById,
       [user.id]: user,
     });
+    setUsers(users?.map((u) => (u.id === user.id ? user : u)));
 
     const userModel = user.toJson();
     const didSucceed = await SaveUser(userModel);
