@@ -78,8 +78,18 @@ const useSaveUser = () => {
     setUsers(users?.map((u) => (u.id === user.id ? user : u)));
 
     const userModel = user.toJson();
-    const didSucceed = await SaveUser(userModel);
-    // todo: handle failure
-    return didSucceed;
+    try {
+      await SaveUser(userModel);
+      return true;
+    } catch (err) {
+      alert('An error occured, rolling back optimistic update');
+      // rollback
+      setUsersById({
+        ...usersById,
+        [user.id]: await GetUserById(user.id),
+      });
+      setUsers(await GetUsers());
+      return false;
+    }
   };
 };

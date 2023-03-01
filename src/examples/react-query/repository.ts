@@ -34,6 +34,7 @@ const useSaveUser = (
     },
     onError: () => {
       alert('An error occured, rolling back optimistic update');
+      // rollback
       client.invalidateQueries(`user-${newUser.id}`);
       client.invalidateQueries('users');
     },
