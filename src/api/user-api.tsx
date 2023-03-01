@@ -26,8 +26,7 @@ export const SaveUser = (user: IUserModel): Promise<boolean> => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       if (user.name === 'error') {
-        console.error('error');
-        return resolve(false);
+        return reject(new Error('Failed to save user'));
       }
       return resolve(true);
     }, 100);
