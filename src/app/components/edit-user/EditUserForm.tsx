@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { IUser } from '../../../api/types';
+import { User } from '../../../api/user';
 import { FormGroup, Label, Input, Button, InputReadonly } from '../../../ui';
 import { SubmitHandler } from '../types';
 
@@ -21,7 +22,9 @@ export const EditUserForm: React.FC<EditUserFormProps> = ({
           <Input
             value={editUser.name}
             onChange={(ev) => {
-              setEditUser({ ...editUser, name: ev.target.value });
+              setEditUser(
+                new User({ ...editUser.toJson(), name: ev.target.value })
+              );
             }}
           />
         </FormGroup>
